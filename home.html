@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voxventure - Home</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            color: black;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-family: 'Grand Hotel', cursive;
+            font-size: 70px;
+            font-weight: bold;
+            color: /* Gradient from very dark grey to black */
+            background: linear-gradient(to bottom, rgb(20, 20, 20), rgb(0, 0, 0));
+            margin-bottom: 20px;
+        }
+        .hero-section p {
+            font-size: 25px;
+            margin-top: 15px;
+            font-weight: normal;
+        }
+        .features {
+            padding: 50px 20px;
+        }
+        .features .card {
+            border: black;
+            box-shadow: 3px 4px 6px rgba(0, 0, 0, 1.7);
+            transition: transform 0.3s;
+            background-color: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(169, 241, 169) 51%, rgb(169, 169, 241) 100%);
+
+        }
+        .features .card:hover {
+            transform: translateY(-10px);
+        }
+        .footer {
+            background-color: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            color: black;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .footer a {
+            color: #00d1ff;
+            text-decoration: none;
+        }
+        .footer p {
+            margin: 0;
+            font-size: 15px;
+        }
+        .navbar {
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            box-shadow: 0 0px 20px rgba(0, 0, 0, 0.7);
+        }
+        .nav-link {
+            text-decoration: none; /* Remove underline from links */
+            color: black;
+            font-family: 'Arial', sans-serif; cursive; /* Set text color to black */
+            font-size: 18px;
+            font-weight: bold; /* Font size */
+            padding: 10px 15px; /* Padding around the link */
+            display: inline-block; /* Make the link behave like a block element */
+            transition: all 0.3s ease;
+        }
+        .navbar-brand{
+            color: black;
+            font-weight: bold;
+            font-size: 25px;
+        }        
+        .custom-navbar {
+            background-color: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            border-bottom: 0px solid;
+        }
+        .custom-navbar .navbar-brand {
+            color: black;
+            font-weight: bold; /* Change brand color */
+        }
+        .custom-navbar .nav-link {
+            color: #555 !important; /* Change link color */
+        }
+        .custom-navbar .nav-link:hover {
+            color: #007bff !important; /* Change link color on hover */
+        }
+        .custom-navbar .navbar-toggler {
+            border-color: #ccc; /* Change the border color of the toggle button */
+        }
+        .custom-navbar .navbar-toggler-icon {
+            background-image: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+        }
+        .container-fluid {
+            background-color: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%); /* Light grey background */
+            padding: 0px; /* Padding inside the container */
+            margin: 0 auto; /* Center the container */
+            width: 95%; /* Full width */ /* Include padding and border in the element's total width and height * /* Light grey border  /* Rounded corners */ /* Subtle shadow for depth */
+            font-family: Arial, sans-serif; /* Font family */
+            color: black; /* Text color */
+        }
+        .features container{
+            background-color: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(169, 241, 169) 51%, rgb(169, 169, 241) 100%);
+        }
+        .col-md-4 .card h3 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #007bff;
+          }
+          
+          .col-md-4 .card p {
+            font-size: 18px;
+            color: black;
+            font-family: 'Arial', sans-serif;
+          }
+        
+            
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">VoxVenture</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login_view">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">Signup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>  <!-- Add this line to link to About page -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Welcome to VoxVenture</h1>
+        <p>Explore a world of seamless collaboration and innovation.</p>
+        <a href="/login_view" class="btn btn-primary btn-lg mt-4">Get Started</a>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features container">
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="card p-4">
+                    <h3>AI-Driven Accuracy</h3>
+                    <p>Providing an authentic and high-quality audio experience.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4">
+                    <h3>Interactive Study Aid</h3>
+                    <p>Engaging audio study to reinforce learning concepts outside the classroom.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4">
+                    <h3>Learn On-the-Go</h3>
+                    <p>Turning any commute or break into a learning opportunity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Voxventure. All Rights Reserved. <a href="/about">Learn More</a></p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

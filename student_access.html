@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Resources</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.349/pdf.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-zmvONaOnNLBhLeBlancWBxTTvwT/ACBvEYZN2aQfLy8TOCwfkcExxTkXmTawKgQzKmvrAAtQSylsoGCznkgIyQL7xljUw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 700;
+            color: #333;
+            font-family: 'Cinzel', sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .pdf-viewer {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .pdf-page {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .audio-player {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        audio {
+            width: 100%;
+            outline: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        .fa-play,
+        .fa-pause {
+            font-size: 24px;
+            cursor: pointer;
+            color: #2575fc;
+            transition: color 0.3s;
+        }
+
+        .fa-play:hover,
+        .fa-pause:hover {
+            color: #6a11cb;
+        }
+
+        .speed-control {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .speed-control button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #2575fc;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .speed-control button:hover {
+            background-color: #6a11cb;
+        }
+
+        h3,
+        h4 {
+            color: #2575fc;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 30px;
+        }
+
+        p {
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .pdf-viewer,
+            .audio-player {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Learning Resources</h1>
+    <div class="container">
+        <div class="pdf-viewer" id="pdfContainer">
+            <h3>PDF Viewer</h3>
+        </div>
+
+        <div class="audio-player">
+            {% if audio_url %}
+            <h4>Audio Player</h4>
+            <audio id="audioPlayer" controls>
+                <source src="{{ audio_url }}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+            <div class="audio-controls">
+                <i class="fa-solid fa-play" id="playBtn"></i>
+                <i class="fa-solid fa-pause" id="pauseBtn" style="display: none;"></i>
+            </div>
+            <div class="speed-control">
+                <button data-speed="0.8">0.80x</button>
+                <button data-speed="0.9">0.90x</button>
+                <button data-speed="1">1x</button>
+            </div>
+            {% else %}
+            <p>No audio available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Get PDF URL from Django template
+        const pdfUrl = "{{ pdf_url }}";
+        const pdfContainer = document.getElementById('pdfContainer');
+
+        // Configure PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.349/pdf.worker.min.js';
+
+        // Load and render all pages of the PDF
+        pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+            let pagePromises = [];
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                pagePromises.push(pdf.getPage(pageNum).then(page => {
+                    const viewport = page.getViewport({ scale: 1.5 });
+                    const canvas = document.createElement('canvas');
+                    canvas.className = 'pdf-page';
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    const ctx = canvas.getContext('2d');
+                    const renderContext = { canvasContext: ctx, viewport: viewport };
+
+                    // Render page into the canvas
+                    return page.render(renderContext).promise.then(() => canvas);
+                }));
+            }
+            return Promise.all(pagePromises);
+        }).then(pages => {
+            pages.forEach(canvas => pdfContainer.appendChild(canvas));
+        }).catch(error => {
+            console.error("Error loading PDF:", error);
+            const errorMsg = document.createElement('p');
+            errorMsg.textContent = "Unable to load the PDF. Please try again later.";
+            pdfContainer.appendChild(errorMsg);
+        });
+
+        // Audio Player Controls
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const speedButtons = document.querySelectorAll('.speed-control button');
+
+        playBtn.addEventListener('click', () => {
+            audioPlayer.play();
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'inline-block';
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            audioPlayer.pause();
+            playBtn.style.display = 'inline-block';
+            pauseBtn.style.display = 'none';
+        });
+
+        speedButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                audioPlayer.playbackRate = button.getAttribute('data-speed');
+                speedButtons.forEach(btn => btn.style.backgroundColor = '#2575fc');
+                button.style.backgroundColor = '#6a11cb';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Networks</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            color: black;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .navbar .dashboard, .navbar .menu-toggle {
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .right-dashboard {
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            color: black;
+            padding: 15px;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            width: 300px;
+            display: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .right-dashboard.open {
+            display: block;
+        }
+
+        .main-content {
+            padding: 20px;
+            margin-top: 20px;
+            color: #000000;
+            flex-grow: 1;
+        }
+
+        h2 {
+            color: #000000;
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 20px;
+            font-family: 'Cinzel', sans-serif;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 2.0);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #000000;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #f32323;
+            color: white;
+            font-size: 16px;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: rgb(26, 167, 33);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, rgb(255, 204, 204) 10%, rgb(204, 229, 255) 51%, rgb(255, 255, 204) 100%);
+            color: black;
+            text-align: center;
+            font-size: 17px;
+            padding: 10px;
+            margin-top: auto;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="dashboard" onclick="redirectToDashboard()">Dashboard</div>
+        <div class="menu-toggle" onclick="toggleDashboard()">☰ Student Info</div>
+    </div>
+
+    <div id="right-dashboard" class="right-dashboard">
+        <h3>Student Info</h3>
+        <ul>
+            <li>Name: Nithin M P</li>
+            <li>Roll No: 1VA22IS065</li>
+            <li>Course: Information Science</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <h2>Computer Networks</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="name">Subject Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+    
+            <label for="pdf">Upload PDF:</label>
+            <input type="file" id="pdf" name="pdf" accept="application/pdf" required><br><br>
+    
+            <button type="submit">Upload</button>
+        </form>
+    
+        {% if audio_file %}
+        <h2>Audio File Generated:</h2>
+        <audio controls autoplay loop>
+            <source src="{{ audio_file.url }}" type="audio/mp3">
+        </audio>
+        <br><br>
+        <a href="{{ MEDIA_URL }}pdfs/{{ pdf_file }}" target="_blank">Download PDF</a>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        © 2024 VoxVenture | All rights reserved.
+    </div>
+
+    <script>
+        function redirectToDashboard() {
+            // Add your redirection logic here
+        }
+
+        function toggleDashboard() {
+            var dashboard = document.getElementById('right-dashboard');
+            dashboard.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

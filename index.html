@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Cinzel';
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: black;
+            padding-bottom: 30px;
+        }
+        
+        h3 {
+            font-family: 'Cinzel', serif !important;
+            font-size: 60px;
+            color: black;
+        }
+        
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: black;
+        }
+
+        .navbar .menu-toggle {
+            font-size: 1.2em;
+            cursor: pointer;
+            color: black;
+        }
+
+        /* Main Content */
+        .main-content {            
+            flex: 1;
+            padding: 100px 30px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-content h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+
+        .subject-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .subject-item {
+            background: rgb(255, 242, 242) !important;
+            color: #333;
+            width: 220px;
+            height: 220px;
+            padding: 20px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 1.5);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .subject-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%);
+            transition: all 0.5s ease;
+        }
+
+        .subject-item:hover::before {
+            top: -10%;
+            left: -10%;
+        }
+
+        .subject-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subject-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .subject-item:hover h3 {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            color: black;
+            text-align: center;
+            padding: 15px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">VoxVenture</div>
+        <div class="menu-toggle" onclick="toggleDashboard()">☰ Student Info</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Available Subjects</h2>
+        <div class="subject-list">
+            <a href="{% url 'toc' %}">
+                <button class="subject-item" type="button"><h3>Theory of Computation</h3></button>
+            </a>
+
+            <a href="{% url 'cn' %}">
+              <button class="subject-item" type="button"><h3>Computer Networks</h3></button>
+            </a>
+
+            <a href="{% url 'software_engineering' %}">
+              <button class="subject-item" type="button"><h3>Software Engineering</h3></button>
+           </a>
+
+           <a href="{% url 'ai' %}">
+            <button class="subject-item" type="button"><h3>Artificial Intelligence</h3></button>
+          </a>
+
+
+          <a href="{% url 'rm' %}">
+            <button class="subject-item" type="button"><h3>Research Methedology</h3></button>
+          </a>
+
+
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        © 2024 VoxVenture | All rights reserved.
+    </div>
+
+    <script>
+        function toggleDashboard() {
+            alert("Student Info Menu Toggled!");
+        }
+
+        function selectSubject(subject) {
+            alert(`You have selected ${subject}`);
+        }
+    </script>
+
+</body>
+
+</html>

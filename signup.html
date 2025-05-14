@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Cinzel', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            text-align: center;
+            background: linear-gradient(135deg, rgb(255, 204, 204) 10%, rgb(204, 229, 255) 51%, rgb(255, 255, 204) 100%);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.9);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: black;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .warning-message {
+            background-color: #f32323;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            transition: background-color 0.1s ease;
+        }
+
+        .warning-message:hover {
+            background-color: rgb(26, 167, 33);
+        }
+
+        .button {
+            background-color: #f32323;
+            color: white;
+            font-size: 16px;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: rgb(26, 167, 33);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            color: black;
+            font-size: 14px;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Sign Up</h1>
+        <div class="warning-message">
+            New users are not allowed to sign up at the moment. Please contact the admin or a registered user to sign up.
+        </div>
+
+        <p>We apologize for the inconvenience. If you are already a registered user, please log in.</p>
+    </div>
+
+    <div class="footer">
+        © 2024 VoxVenture | All rights reserved.
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vox Venture Login</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            display: flex;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 1.3);
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h1 {
+            font-family: 'Grand Hotel', cursive;
+            font-size: 3em;
+            color: #262626;
+            margin-bottom: 20px;
+        }
+        .login-container input[type="text"], .login-container input[type="password"] {
+            width: 90%;
+            padding: 8px;
+            margin: 15px 0;
+            border: 1px solid black; /* Change the border color to black */
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #f03838;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        .login-container button:hover {
+            background-color: #32bf2d;
+        }
+        .login-container .help-text {
+            color: #615d5d;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        .login-container .fb-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .login-container .fb-login img {
+            width: 32px;
+            margin-right: 6px;
+        }
+        .login-container .fb-login span {
+            color: #044718;
+            margin-left: 0px;
+        }
+        .login-container .sign-up {
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .main-container {
+            text-align: center;
+            width: 100%;
+            max-width: 1200px;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        /* Sections Styling */
+        .sections {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .student-section,
+        .faculty-section {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            width: 40%;
+            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .student-section:hover,
+        .faculty-section:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+        }
+        /* Headings */
+        .student-section h2,
+        .faculty-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        /* Input Fields and Buttons */
+        label {
+            text-align: left;
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #ddd;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+        }
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn:hover {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            transform: translateY(-3px);
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sections {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .student-section,
+            .faculty-section {
+                width: 90%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Vox Venture</h1>
+        <form action="{% url 'login_view' %}" method="post">
+            {% csrf_token %}
+            <input type="text" id="userId" name="userId" placeholder="Enter ID or USN" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit">Log In</button>
+        </form>
+        <div class="fb-login">
+            <img src="{% static 'logo_image/expanded_logo1.jpg' %}" alt="logo_image">
+            <span>User Login</span>
+        </div>
+        <div class="help-text">
+            AI Based Learning Guide
+        </div>
+    </div>
+<!-- 
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const userId = document.getElementById('userId').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch(window.location.href, {  // Submit to the current URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: JSON.stringify({ userId: userId, password: password })
+            });
+
+            const data = await response.json();
+
+            if (data.message === 'Login successful') {
+                window.location.href = 'index.html';  // Redirect on success
+            } else {
+                alert('Invalid ID or Password');
+            }
+        });
+    </script> -->
+</body>
+</html>

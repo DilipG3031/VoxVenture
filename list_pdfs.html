@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded PDFs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgb(241, 169, 183) 10%, rgb(151, 203, 255) 51%, rgb(242, 242, 113) 100%);
+            color: #4b3832; /* Chocolate Text */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 45px;
+            font-weight: bold;
+            color: black;
+            font-family: 'Cinzel', sans-serif;
+        }
+
+        .pdf-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start; 
+            width: 100%; 
+        }
+
+        .pdf-item {
+            background-color: #ffffff; /* White Box */
+            color: #4b3832; /* Chocolate Text */
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+            padding: 30px;
+            text-align: center;
+            width: calc(20% - 24px); /* Adjust for 5 items in a row */
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .pdf-item:hover {
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgb(255, 204, 204) 10%, rgb(204, 229, 255) 51%, rgb(255, 255, 204) 100%);
+            /* Bisque Hover */
+        }
+
+        .pdf-info {
+            margin-bottom: 20px;
+        }
+
+        .pdf-info h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .pdf-info p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .pdf-preview img {
+            width: 50px; /* Set the desired width */
+            height: 75px; /* Set the desired height */
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #0056b2;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .pdf-item {
+                width: calc(33.333% - 24px); /* Adjust for smaller screens (3 in a row) */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pdf-item {
+                width: calc(50% - 24px); /* Adjust for smaller screens (2 in a row) */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .pdf-item {
+                width: calc(100% - 40px); /* Adjust for smaller screens (1 in a row) */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Your Learning Resources</h1>
+    </header>
+
+    <main>
+        <section class="pdf-list">
+            {% for material in subject_materials %}
+                <div class="pdf-item">
+                    <a href="{% url 'student_access' material.id %}">
+                        <div class="pdf-info">
+                            <h3 class="material-name">{{ material.name }}</h3>
+                            <p class="pdf-filename">{{ material.pdf.name }}</p>
+                        </div>
+                        <div class="pdf-preview">
+                            <img src="{% static 'logo_image/pdfimg.png' %}" alt="pdf overview">
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>
